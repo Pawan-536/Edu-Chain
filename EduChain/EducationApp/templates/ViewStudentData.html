@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PublicEduChain</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- Navbar/Menu -->
+  <nav class="bg-gray-800 shadow-md">
+    <div class="max-w-15xl mx-auto px-4">
+      <div class="flex justify-between items-center h-25">
+        <div class="flex space-x-4">
+          <a href="{% url 'ShareData' %}" class="text-white hover:text-orange-400 font-semibold px-3 py-2">Shared Owned Education Data</a>
+          <a href="{% url 'ViewData' %}" class="text-white hover:text-orange-400 font-semibold px-3 py-2">View Your Data</a>
+          <a href="{% url 'index' %}" class="text-white hover:text-orange-400 font-semibold px-3 py-2">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <main class="py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg p-6 shadow-lg">
+      
+      <!-- Title Section -->
+      <div class="mb-6">
+        <h2 class="text-2xl sm:text-3xl font-bold text-orange-400 text-center">
+          Secure Sharing of Student's Education Data
+        </h2>
+        <marquee class="text-pink-400 text-lg mt-2">Sharing Student-Owned Educational Data</marquee>
+      </div>
+
+      <!-- Data Section -->
+      <div class="text-center mt-10">
+        <div class="overflow-auto max-w-full text-white text-base sm:text-lg whitespace-nowrap">
+            {{ data|safe }}
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PublicEduChain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function validate() {
+      var x = document.forms["f1"]["username"].value;
+      var y = document.forms["f1"]["password"].value;
+      if (x == null || x == "") {
+        alert("Username must be entered");
+        document.f1.username.focus();
+        return false;
+      }
+      if (y == null || y == "") {
+        alert("Password must be entered");
+        document.f1.password.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body class="bg-gray-900 min-h-screen flex flex-col">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-gray-800 text-white py-4 shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <ul class="flex space-x-6 justify-center font-semibold text-sm md:text-base">
+        <li><a href="{% url 'index' %}" class="hover:text-orange-400">Home</a></li>
+        <li><a href="{% url 'EducationLogin' %}" class="hover:text-orange-400">Education Department Login</a></li>
+        <li><a href="{% url 'StudentLogin' %}" class="hover:text-orange-400">Student Login</a></li>
+        <li><a href="{% url 'Register' %}" class="hover:text-orange-400">New User Profile Generation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center py-16 px-4">
+    <div class="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8">
+      {% if data %}
+      <div class="text-center text-red-400 mb-4">{{ data|safe }}</div>
+      {% endif %}
+      <h2 class="text-white text-center text-2xl font-bold mb-6">Student Login</h2>
+
+      <form name="f1" method="post" action="{% url 'StudentLoginAction' %}" onsubmit="return validate()">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="username" class="block text-white mb-2">Username</label>
+          <input type="text" name="username" id="username" class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+        </div>
+        <div class="mb-6">
+          <label for="password" class="block text-white mb-2">Password</label>
+          <input type="password" name="password" id="password" class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-300">Login</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

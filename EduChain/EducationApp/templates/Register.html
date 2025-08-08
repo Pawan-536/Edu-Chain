@@ -1,0 +1,139 @@
+{% load static %}
+<html>
+<head>
+  <title>PublicEduChain</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <!-- ✅ Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    function validate() {
+      var x = document.forms["f1"]["t1"].value;
+      var y = document.forms["f1"]["t2"].value;
+      var a = document.forms["f1"]["t3"].value;
+      var b = document.forms["f1"]["t4"].value;
+      var c = document.forms["f1"]["t5"].value;
+
+      if (x == null || x == "") {
+        alert("Username must be entered");
+        document.f1.t1.focus();
+        return false;
+      }
+      if (y == null || y == "") {
+        alert("Password must be entered");
+        document.f1.t2.focus();
+        return false;
+      }
+      if (a == null || a == "") {
+        alert("Contact no must be entered");
+        document.f1.t3.focus();
+        return false;
+      }
+      if (isNaN(a)) {
+        alert("Contact no must be numeric");
+        document.f1.t3.focus();
+        return false;
+      }
+      if (a.length != 10) {
+        alert("Contact number must be 10 digits long");
+        document.f1.t3.focus();
+        return false;
+      }
+      if (b == null || b == "") {
+        alert("Email ID must be entered");
+        document.f1.t4.focus();
+        return false;
+      }
+      var filter = /^([a-zA-Z0-9_\.\-])+\@([a-z]+\.)+(com)+$/;
+      if (!filter.test(b)) {
+        alert('Please enter a valid email address');
+        document.f1.t4.focus();
+        return false;
+      }
+      if (c == null || c == "") {
+        alert("Address must be entered");
+        document.f1.t5.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- ✅ Navigation -->
+  <nav class="bg-gray-800 p-4">
+    <ul class="flex justify-center space-x-6 text-white font-medium">
+      <li><a href="{% url 'index' %}" class="hover:text-orange-400">Home</a></li>
+      <li><a href="{% url 'EducationLogin' %}" class="hover:text-orange-400">Education Department Login</a></li>
+      <li><a href="{% url 'StudentLogin' %}" class="hover:text-orange-400">Student Login</a></li>
+      <li><a href="{% url 'Register' %}" class="hover:text-orange-400">New User Profile Generation</a></li>
+    </ul>
+  </nav>
+
+  <!-- ✅ Page Content -->
+  <div class="flex flex-col items-center py-12 px-4">
+    <!-- Message -->
+    {% if data %}
+    <div class="mb-6 text-green-400 text-lg">
+      {{ data|safe }}
+    </div>
+    {% endif %}
+
+    <h2 class="text-2xl font-semibold mb-6">New User Profile Creation</h2>
+
+    <!-- ✅ Registration Form -->
+    <form name="f1" method="post" action="{% url 'RegisterAction' %}" onsubmit="return validate()" class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md space-y-6">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div>
+        <label class="block mb-1">Username</label>
+        <input type="text" name="t1" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block mb-1">Password</label>
+        <input type="password" name="t2" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+      </div>
+
+      <!-- Contact No -->
+      <div>
+        <label class="block mb-1">Contact No</label>
+        <input type="text" name="t3" maxlength="10" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+      </div>
+
+      <!-- Email ID -->
+      <div>
+        <label class="block mb-1">Email ID</label>
+        <input type="text" name="t4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label class="block mb-1">Address</label>
+        <input type="text" name="t5" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+      </div>
+
+      <!-- User Type -->
+      <div>
+        <label class="block mb-1">User Type</label>
+        <select name="t6" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400">
+          <option value="Education Department">Education Department</option>
+          <option value="Student">Student</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded shadow">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

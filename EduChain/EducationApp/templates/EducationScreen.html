@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+<head>
+  <title>PublicEduChain</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <!-- ✅ Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- ✅ Navigation Menu -->
+  <div id="menu" class="bg-gray-800 p-4 shadow-md">
+    <ul class="flex justify-center space-x-8 text-lg font-medium">
+      <li><a href="{% url 'AccessData' %}" class="hover:text-orange-400">Access Student Data</a></li>
+      <li><a href="{% url 'index' %}" class="hover:text-orange-400">Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- ✅ Main Page Container -->
+  <div id="page" class="max-w-6xl mx-auto px-6 py-12">
+    <div id="content">
+      <div class="post bg-gray-800 rounded-lg shadow-lg p-6">
+        
+        <!-- ✅ Title Section -->
+        <div class="title mb-6 text-center">
+          <h2 class="text-2xl font-bold text-white">Secure Sharing of Student's Education Data</h2>
+        </div>
+
+        <!-- ✅ Dynamic Message -->
+        {% if data %}
+          <div class="text-center text-white text-lg mb-6">
+            {{ data|safe }}
+          </div>
+        {% endif %}
+
+        <!-- ✅ Image and Content -->
+        <div class="entry text-center">
+          <img src="{% static 'images/images.jpg' %}" alt="Banner" width="890" height="200" class="mx-auto rounded-md shadow-md mb-6" />
+          <!-- Optional paragraph (currently commented out) -->
+          <!--
+          <p class="text-white text-md">
+            Abstract: PublicEduChain allows students to store their data in smart contracts created on the public Ethereum network,
+            making it possible to share this information with any educational institution and administrative units. Educational institutions
+            can access student data stored in smart contracts through Learning Management System (LMS) applications and can add data to these contracts.
+          </p>
+          -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

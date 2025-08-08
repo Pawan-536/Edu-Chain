@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PublicEduChain</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-gray-800 p-4 shadow-md">
+    <ul class="flex space-x-6 justify-center font-semibold">
+      <li><a href="{% url 'ShareData' %}" class="hover:text-orange-400">Shared Owned Education Data</a></li>
+      <li><a href="{% url 'ViewData' %}" class="hover:text-orange-400">View Your Data</a></li>
+      <li><a href="{% url 'index' %}" class="hover:text-orange-400">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <main class="container mx-auto px-4 py-8">
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-center text-orange-400 mb-6">Secure Sharing of Student's Education Data</h2>
+
+      <div class="text-center mb-6">
+        <div class="text-white text-lg">{{ data|safe }}</div>
+      </div>
+
+      <div class="flex justify-center">
+        <img src="{% static 'images/images.jpg' %}" alt="Educational Sharing" class="rounded-lg shadow-lg w-full max-w-4xl">
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

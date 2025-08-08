@@ -1,0 +1,75 @@
+{% load static %}
+<html>
+<head>
+  <title>PublicEduChain</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <!-- ✅ Use Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function validate() {
+      var x = document.forms["f1"]["username"].value;
+      var y = document.forms["f1"]["password"].value;
+      if (x == null || x == "") {
+        window.alert("Username must be entered");
+        document.f1.username.focus();
+        return false;
+      }
+      if (y == null || y == "") {
+        window.alert("Password must be entered");
+        document.f1.password.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+
+  <!-- ✅ Navigation Menu -->
+  <div id="menu" class="bg-gray-800 p-4 shadow-md">
+    <ul class="flex space-x-6 justify-center font-medium">
+      <li><a href="{% url 'index' %}" class="hover:text-orange-400">Home</a></li>
+      <li><a href="{% url 'EducationLogin' %}" class="hover:text-orange-400">Education Department Login</a></li>
+      <li><a href="{% url 'StudentLogin' %}" class="hover:text-orange-400">Student Login</a></li>
+      <li><a href="{% url 'Register' %}" class="hover:text-orange-400">New User Profile Generation</a></li>
+    </ul>
+  </div>
+
+  <!-- ✅ Main Entry -->
+  <div class="entry mt-16">
+    {% if data %}
+      <p class="text-center text-lg text-white">{{ data|safe }}</p>
+    {% endif %}
+
+    <h2 class="text-center text-xl font-semibold mt-4 mb-8">Education Department Login Screen</h2>
+
+    <!-- ✅ Login Form -->
+    <form name="f1" method="post" action="{% url 'EducationLoginAction' %}" onsubmit="return validate()" class="flex justify-center">
+      {% csrf_token %}
+      <table class="w-96 bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-lg">
+        <tr class="mb-4">
+          <th class="text-left py-2 px-4">Username</th>
+          <td class="py-2 px-4">
+            <input type="text" name="username" class="w-full p-2 rounded border border-gray-500 text-black" />
+            <div id='nameid'></div>
+          </td>
+        </tr>
+        <tr class="mb-4">
+          <th class="text-left py-2 px-4">Password</th>
+          <td class="py-2 px-4">
+            <input type="password" name="password" class="w-full p-2 rounded border border-gray-500 text-black" />
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="py-2 px-4">
+            <input type="submit" value="Login" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded cursor-pointer" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+</body>
+</html>
